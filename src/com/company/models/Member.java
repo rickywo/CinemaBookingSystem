@@ -15,14 +15,14 @@ public class Member extends User {
     public void changePlan(int p) {
         switch(p) {
             case Plan.PREMIUM:
-                plan = new PremiumPlan();
+                plan = PremiumPlan.getInstance();
                 break;
             case Plan.ELITE:
-                plan = new ElitePlan();
+                plan = ElitePlan.getInstance();
                 break;
             case Plan.STANDARD:
             default:
-                plan = new StandardPlan();
+                plan = StandardPlan.getInstance();
                 break;
         }
     }

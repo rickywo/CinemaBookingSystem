@@ -5,7 +5,14 @@ package com.company.models;
  */
 public class ElitePlan extends Plan {
 
-    ElitePlan() {
+    static Plan singleton = null;
+
+    public static Plan getInstance() {
+        if(singleton == null) singleton = new ElitePlan();
+        return singleton;
+    }
+
+    private ElitePlan() {
         payment = 2000.0;
         discount = new double[]{0.15, 0.20};
     }
