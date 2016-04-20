@@ -7,31 +7,54 @@ import java.util.Hashtable;
  * Created by blahblah Team on 2016/4/16.
  */
 public class TheatreManager {
+
     private Hashtable <String, User> users;
     private Hashtable <String, Play> plays;
     private Hashtable <Date, Show> shows;
     private Hashtable <Date, Hashtable<String, Booking>> bookings;
 
-    private User getUserById(String id) {
+    private static TheatreManager singleton;
+
+    public static TheatreManager getInstance() {
+        if(singleton == null) singleton = new TheatreManager();
+        return singleton;
+    }
+
+    private TheatreManager() {
+        users = new Hashtable<String, User>();
+        plays = new Hashtable<String, Play>();
+        shows = new Hashtable<Date, Show>();
+        bookings = new Hashtable<Date, Hashtable<String, Booking>>();
+    }
+
+    public User getUserById(String id) {
         // TODO: use id as key to find User in Hashtable users
         return users.get(id);
     }
 
-    private Play getPlayByName(String name) {
+    public Play getPlayByName(String name) {
         return plays.get(name);
     }
 
-    private Show getShowByDate(Date date) {
+    public Show getShowByDate(Date date) {
         return shows.get(date);
     }
 
-    private Booking getBookingByDateAndUserID(Date date, String id) {
+    public Booking getBookingByDateAndUserID(Date date, String id) {
         return bookings.get(date).get(id);
     }
 
-    public boolean addMember() {
+    public void addMember(int type, String account) {
         // TODO: Add a member in to Hashtable users
-        return true;
+        switch (type) {
+            case User.ADMIN:
+                users.put(account, new Admin(account));
+                break;
+            case User.MEMBER:
+            default:
+                users.put(account, new Member(account));
+                break;
+        }
     }
 
     public boolean addPlay() {
