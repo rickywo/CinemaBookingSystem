@@ -27,6 +27,10 @@ public class Member extends User {
         }
     }
 
+    public double getCredit() {
+        return this.credit;
+    }
+
     public double topUpCredit(double amount) {
         this.credit += amount;
         return this.credit;
